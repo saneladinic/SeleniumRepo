@@ -21,7 +21,7 @@ public class LogInTests extends BaseTest {
 		String textForAssertion = excelReader.getStringData("TSu2", 11, 3);
 
 		logInFormFilling(email, password);
-		String actualText = mainNavigation.textSingOut();
+		String actualText = mainNavigation.textSignOut();
 		assertEquals(actualText, textForAssertion);
 	}
 
@@ -58,7 +58,7 @@ public class LogInTests extends BaseTest {
 	}
 
 	public void logInFormFilling(String email, String password) {
-		mainNavigation.singInClick();
+		mainNavigation.signInClick();
 		logInPage.insertEmail(email);
 		logInPage.insertPassword(password);
 		logInPage.signInButtonClick();

@@ -8,7 +8,7 @@ public class MainNavigationPage {
 
 	WebDriver driver;
 	WebElement signIn;
-	WebElement singOut;
+	WebElement signOut;
 
 	public MainNavigationPage(WebDriver driver) {
 		this.driver = driver;
@@ -22,15 +22,15 @@ public class MainNavigationPage {
 		return driver.findElement(By.className("logout"));
 	}
 
-	public String textSingOut() {
+	public String textSignOut() {
 		return this.getSignOut().getText();
 	}
 
-	public void singOutClick() {
+	public void signOutClick() {
 		this.getSignOut().click();
 	}
 
-	public void singInClick() {
+	public void signInClick() {
 		this.getSignIn().click();
 	}
 

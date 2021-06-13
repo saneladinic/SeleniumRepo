@@ -21,14 +21,14 @@ public class LogOutTests extends BaseTest {
 		String textForAssertion = excelReader.getStringData("TSu3", 10, 3);
 
 		logInFormFilling(email, password);
-		mainNavigation.singOutClick();
+		mainNavigation.signOutClick();
 
 		String actualText = mainNavigation.textSignIn();
 		assertEquals(actualText, textForAssertion);
 	}
 
 	public void logInFormFilling(String email, String password) {
-		mainNavigation.singInClick();
+		mainNavigation.signInClick();
 		logInPage.insertEmail(email);
 		logInPage.insertPassword(password);
 		logInPage.signInButtonClick();

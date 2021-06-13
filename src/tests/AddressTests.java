@@ -74,7 +74,7 @@ public class AddressTests extends BaseTest {
 
 		String email = excelReader.getStringData("TSu2", 6, 3);
 		String password = excelReader.getStringData("TSu2", 7, 3);
-		mainNavigation.singInClick();
+		mainNavigation.signInClick();
 		logInPage.insertEmail(email);
 		logInPage.insertPassword(password);
 		logInPage.signInButtonClick();

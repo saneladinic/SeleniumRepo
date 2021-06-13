@@ -12,6 +12,7 @@ import pages.LogInPage;
 import pages.MainNavigationPage;
 import pages.MyAccountPage;
 import pages.MyAddressPage;
+import pages.MyPersonalInformaitionPage;
 import pages.YourAddressPage;
 
 public class BaseTest {
@@ -24,7 +25,8 @@ public class BaseTest {
 	MyAccountPage myAccountPage;
 	MyAddressPage myAddressPage;
 	YourAddressPage yourAddressPage;
-
+	MyPersonalInformaitionPage myPersonalInformaitionPage;
+	
 	@BeforeClass
 	public void beforeClass() throws IOException {
 		System.setProperty("webdriver.chrome.driver", "driver-lib/chromedriver");
@@ -38,6 +40,7 @@ public class BaseTest {
 		myAccountPage = new MyAccountPage(driver);
 		myAddressPage = new MyAddressPage(driver);
 		yourAddressPage = new YourAddressPage(driver);
+		myPersonalInformaitionPage=new MyPersonalInformaitionPage(driver);
 	}
 
 	@AfterClass

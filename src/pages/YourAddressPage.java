@@ -23,7 +23,6 @@ public class YourAddressPage {
 
 	public WebElement getAddressInputField() {
 		return driver.findElement(By.id("address1"));
-
 	}
 
 	public WebElement getSaveButton() {
