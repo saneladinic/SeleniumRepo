@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 public class AddressTests extends BaseTest {
 
+	private static final String SHEET_NAME = "TSu4";
+
 	@BeforeMethod
 	public void beforMethod() {
 		driver.navigate().to(ulrHome);
@@ -15,19 +17,18 @@ public class AddressTests extends BaseTest {
 	}
 
 	@Test(priority = 1)
-	public void updateAddresstest() {
+	public void updateAddressTest() {
 
-		String newAddress = excelReader.getStringData("TSu4", 8, 3);
+		String newAddress = excelReader.getStringData(SHEET_NAME, 8, 3);
 		logIn();
 		myAccountPage.myAddressesClick();
 		myAddressPage.updateButtonClick();
 		yourAddressPage.updateAddress(newAddress);
 		yourAddressPage.saveButtonClick();
 
-		String textForAssertion = excelReader.getStringData("TSu4", 11, 3);
+		String textForAssertion = excelReader.getStringData(SHEET_NAME, 11, 3);
 		String actualText = myAddressPage.textMyAddress();
 		assertEquals(actualText, textForAssertion);
-
 	}
 
 	@Test(priority = 2)
@@ -35,25 +36,25 @@ public class AddressTests extends BaseTest {
 		logIn();
 		myAccountPage.myAddressesClick();
 		myAddressPage.addNewAddressButtonClick();
-		String address = excelReader.getStringData("TSu4", 22, 3);
+		String address = excelReader.getStringData(SHEET_NAME, 22, 3);
 		yourAddressPage.insertAddress(address);
-		String city = excelReader.getStringData("TSu4", 23, 3);
+		String city = excelReader.getStringData(SHEET_NAME, 23, 3);
 		yourAddressPage.insertCity(city);
 		yourAddressPage.stateDropDownManuClick();
 		Thread.sleep(2000);
-		String postcode = excelReader.getStringData("TSu4", 25, 3);
+		String postcode = excelReader.getStringData(SHEET_NAME, 25, 3);
 		yourAddressPage.insertPostcode(postcode);
 		Thread.sleep(2000);
-		String homePhone = excelReader.getStringData("TSu4", 26, 3);
+		String homePhone = excelReader.getStringData(SHEET_NAME, 26, 3);
 		yourAddressPage.insertHomePhone(homePhone);
-		String mobilePhone = excelReader.getStringData("TSu4", 27, 3);
+		String mobilePhone = excelReader.getStringData(SHEET_NAME, 27, 3);
 		yourAddressPage.insertMobilePhone(mobilePhone);
-		String nameAddress = excelReader.getStringData("TSu4", 28, 3);
+		String nameAddress = excelReader.getStringData(SHEET_NAME, 28, 3);
 		yourAddressPage.insertNameForAddress(nameAddress);
 		yourAddressPage.saveButtonClick();
 
-		int textForAssertion = excelReader.getIntegerData("TSu4", 30, 3);
-		int addressCount = myAddressPage.addresaCount();
+		int textForAssertion = excelReader.getIntegerData(SHEET_NAME, 30, 3);
+		int addressCount = myAddressPage.addressCount();
 		assertEquals(addressCount, textForAssertion);
 
 	}
@@ -65,8 +66,8 @@ public class AddressTests extends BaseTest {
 		Thread.sleep(5000);
 		myAddressPage.deleteButtonClick();
 
-		int textForAssertion = excelReader.getIntegerData("TSu4", 42, 3);
-		int addressCount = myAddressPage.addresaCount();
+		int textForAssertion = excelReader.getIntegerData(SHEET_NAME, 42, 3);
+		int addressCount = myAddressPage.addressCount();
 		assertEquals(addressCount, textForAssertion);
 	}
 

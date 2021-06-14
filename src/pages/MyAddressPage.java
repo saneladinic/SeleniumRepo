@@ -52,7 +52,7 @@ public class MyAddressPage {
 		driver.switchTo().alert().accept();
 	}
 
-	public int addresaCount() {
+	public int addressCount() {
 		List<WebElement> addressList = driver.findElements(By.cssSelector(".col-xs-12.col-sm-6.address"));
 		return addressList.size();
 	}

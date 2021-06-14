@@ -49,5 +49,4 @@ public class LogInPage {
 	public String textInvalidCredentials() {
 		return this.getInvalidCredentialsText().getText();
 	}
-
 }

@@ -4,16 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class MyPersonalInformaitionPage {
+public class MyPersonalInformationPage {
 
 	WebDriver driver;
 	WebElement mrRadioButton;
 	WebElement mrsRadioButton;
 	WebElement selectedMr;
 	WebElement selectedMrs;
-	WebElement firstNamaInputField;
+	WebElement firstNameInputField;
 	WebElement ErrorMessage;
-	WebElement lastNamaInputField;
+	WebElement lastNameInputField;
 	WebElement saveButton;
 	WebElement oldPassword;
 	WebElement dayOfBirth;
@@ -21,7 +21,7 @@ public class MyPersonalInformaitionPage {
 	WebElement yearOfBirth;
 	WebElement greenMessage;
 
-	public MyPersonalInformaitionPage(WebDriver driver) {
+	public MyPersonalInformationPage(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -41,7 +41,7 @@ public class MyPersonalInformaitionPage {
 		return driver.findElement(By.xpath("//*[@id=\"uniform-id_gender2\"]/span"));
 	}
 
-	public WebElement getFirstNamaInputField() {
+	public WebElement getFirstNameInputField() {
 		return driver.findElement(By.id("firstname"));
 	}
 
@@ -49,7 +49,7 @@ public class MyPersonalInformaitionPage {
 		return driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/div/ol/li"));
 	}
 
-	public WebElement getLastNamaInputField() {
+	public WebElement getLastNameInputField() {
 		return driver.findElement(By.id("lastname"));
 	}
 
@@ -94,11 +94,11 @@ public class MyPersonalInformaitionPage {
 	}
 
 	public void clearFirstName() {
-		this.getFirstNamaInputField().clear();
+		this.getFirstNameInputField().clear();
 	}
 
 	public void clearLastName() {
-		this.getLastNamaInputField().clear();
+		this.getLastNameInputField().clear();
 	}
 
 	public String textErrorMessage() {

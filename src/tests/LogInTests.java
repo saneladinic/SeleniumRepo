@@ -8,41 +8,46 @@ import org.testng.annotations.Test;
 
 public class LogInTests extends BaseTest {
 
+	private static final String SHEET_NAME = "TSu2";
+
 	@BeforeMethod
-	public void beforMethod() {
+	public void beforeMethod() {
 		driver.navigate().to(ulrHome);
 		driver.manage().window().maximize();
 	}
 
 	@Test(priority = 1)
 	public void logInValidCredentials() throws InterruptedException {
-		String email = excelReader.getStringData("TSu2", 6, 3);
-		String password = excelReader.getStringData("TSu2", 7, 3);
-		String textForAssertion = excelReader.getStringData("TSu2", 11, 3);
+		String email = excelReader.getStringData(SHEET_NAME, 6, 3);
+		String password = excelReader.getStringData(SHEET_NAME, 7, 3);
+		String textForAssertion = excelReader.getStringData(SHEET_NAME, 11, 3);
 
 		logInFormFilling(email, password);
+		
 		String actualText = mainNavigation.textSignOut();
 		assertEquals(actualText, textForAssertion);
 	}
 
 	@Test(priority = 2)
 	public void logInInvalidPassword() {
-		String email = excelReader.getStringData("TSu2", 20, 3);
-		String password = excelReader.getStringData("TSu2", 21, 3);
-		String textForAssertion = excelReader.getStringData("TSu2", 25, 3);
+		String email = excelReader.getStringData(SHEET_NAME, 20, 3);
+		String password = excelReader.getStringData(SHEET_NAME, 21, 3);
+		String textForAssertion = excelReader.getStringData(SHEET_NAME, 25, 3);
 
 		logInFormFilling(email, password);
+		
 		String actualText = logInPage.textInvalidCredentials();
 		assertEquals(actualText, textForAssertion);
 	}
 
 	@Test(priority = 3)
 	public void logInInvalidEmailAddress() {
-		String email = excelReader.getStringData("TSu2", 34, 3);
-		String password = excelReader.getStringData("TSu2", 35, 3);
-		String textForAssertion = excelReader.getStringData("TSu2", 39, 3);
+		String email = excelReader.getStringData(SHEET_NAME, 34, 3);
+		String password = excelReader.getStringData(SHEET_NAME, 35, 3);
+		String textForAssertion = excelReader.getStringData(SHEET_NAME, 39, 3);
 
 		logInFormFilling(email, password);
+		
 		String actualText = logInPage.textInvalidCredentials();
 		assertEquals(actualText, textForAssertion);
 	}
@@ -50,22 +55,16 @@ public class LogInTests extends BaseTest {
 	@Test(priority = 4)
 	public void logInEmptyCredentials() {
 
-		String textForAssertion = excelReader.getStringData("TSu2", 53, 3);
+		String textForAssertion = excelReader.getStringData(SHEET_NAME, 53, 3);
+		
 		logInFormFilling("", "");
 
 		String actualText = logInPage.textInvalidCredentials();
 		assertEquals(actualText, textForAssertion);
 	}
 
-	public void logInFormFilling(String email, String password) {
-		mainNavigation.signInClick();
-		logInPage.insertEmail(email);
-		logInPage.insertPassword(password);
-		logInPage.signInButtonClick();
-	}
-
 	@AfterMethod
-	public void AfterMethod() {
+	public void afterMethod() {
 		driver.manage().deleteAllCookies();
 		driver.navigate().refresh();
 	}

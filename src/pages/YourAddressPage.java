@@ -15,7 +15,7 @@ public class YourAddressPage {
 	WebElement postcodeInputField;
 	WebElement homePhoneInputField;
 	WebElement mobilePhoneInputField;
-	WebElement namaForAddress;
+	WebElement nameForAddress;
 
 	public YourAddressPage(WebDriver driver) {
 		this.driver = driver;
@@ -50,7 +50,7 @@ public class YourAddressPage {
 		return driver.findElement(By.id("phone_mobile"));
 	}
 
-	public WebElement getNamaForAddress() {
+	public WebElement getNameForAddress() {
 		return driver.findElement(By.id("alias"));
 	}
 
@@ -89,6 +89,6 @@ public class YourAddressPage {
 	}
 
 	public void insertNameForAddress(String nameAddress) {
-		this.getNamaForAddress().sendKeys(nameAddress);
+		this.getNameForAddress().sendKeys(nameAddress);
 	}
 }

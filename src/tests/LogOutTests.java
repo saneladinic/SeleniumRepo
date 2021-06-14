@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 public class LogOutTests extends BaseTest {
 
+	private static final String SHEET_NAME = "TSu3";
+
 	@BeforeMethod
 	public void beforeMethod() {
 		driver.navigate().to(ulrHome);
@@ -16,22 +18,15 @@ public class LogOutTests extends BaseTest {
 
 	@Test(priority = 1)
 	public void logOut() {
-		String email = excelReader.getStringData("TSu3", 5, 3);
-		String password = excelReader.getStringData("TSu3", 6, 3);
-		String textForAssertion = excelReader.getStringData("TSu3", 10, 3);
+		String email = excelReader.getStringData(SHEET_NAME, 5, 3);
+		String password = excelReader.getStringData(SHEET_NAME, 6, 3);
+		String textForAssertion = excelReader.getStringData(SHEET_NAME, 10, 3);
 
 		logInFormFilling(email, password);
 		mainNavigation.signOutClick();
 
 		String actualText = mainNavigation.textSignIn();
 		assertEquals(actualText, textForAssertion);
-	}
-
-	public void logInFormFilling(String email, String password) {
-		mainNavigation.signInClick();
-		logInPage.insertEmail(email);
-		logInPage.insertPassword(password);
-		logInPage.signInButtonClick();
 	}
 
 	@AfterMethod

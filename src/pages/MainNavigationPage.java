@@ -37,5 +37,4 @@ public class MainNavigationPage {
 	public String textSignIn() {
 		return this.getSignIn().getText();
 	}
-
 }
