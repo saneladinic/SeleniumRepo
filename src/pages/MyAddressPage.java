@@ -19,7 +19,7 @@ public class MyAddressPage {
 	}
 
 	public WebElement getUpdateButton() {
-		return driver.findElement(By.cssSelector(".box.first_item.item  a[title='Update'] > span"));
+		return driver.findElement(By.xpath("/html/body/div/div[2]/div/div[3]/div/div[1]/div/div/ul/li[9]/a[1]/span"));
 	}
 
 	public WebElement getTextMyAddress() {

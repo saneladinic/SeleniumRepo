@@ -23,7 +23,6 @@ public class MyAccountPage {
 		return driver.findElement(By.className("icon-user"));
 	}
 	
-
 	public WebElement getMyWishlists() {
 		return driver.findElement(By.className("icon-heart"));
 	}

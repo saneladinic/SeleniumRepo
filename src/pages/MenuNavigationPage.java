@@ -4,13 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class MainNavigationPage {
+public class MenuNavigationPage {
 
 	WebDriver driver;
 	WebElement signIn;
 	WebElement signOut;
+	WebElement womenTab;
 
-	public MainNavigationPage(WebDriver driver) {
+	public MenuNavigationPage(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -20,6 +21,10 @@ public class MainNavigationPage {
 
 	public WebElement getSignOut() {
 		return driver.findElement(By.className("logout"));
+	}
+
+	public WebElement getWomenTab() {
+		return driver.findElement(By.className("sf-with-ul"));
 	}
 
 	public String textSignOut() {
@@ -36,5 +41,9 @@ public class MainNavigationPage {
 
 	public String textSignIn() {
 		return this.getSignIn().getText();
+	}
+
+	public void womenTabClick() {
+		this.getWomenTab().click();
 	}
 }

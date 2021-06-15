@@ -14,17 +14,17 @@ public class LogInTests extends BaseTest {
 	public void beforeMethod() {
 		driver.navigate().to(ulrHome);
 		driver.manage().window().maximize();
+		menuNavigationPage.signInClick();
 	}
 
 	@Test(priority = 1)
 	public void logInValidCredentials() throws InterruptedException {
 		String email = excelReader.getStringData(SHEET_NAME, 6, 3);
 		String password = excelReader.getStringData(SHEET_NAME, 7, 3);
-		String textForAssertion = excelReader.getStringData(SHEET_NAME, 11, 3);
-
-		logInFormFilling(email, password);
+		logInPage.logInFormFilling(email, password);
 		
-		String actualText = mainNavigation.textSignOut();
+		String textForAssertion = excelReader.getStringData(SHEET_NAME, 11, 3);
+		String actualText = menuNavigationPage.textSignOut();
 		assertEquals(actualText, textForAssertion);
 	}
 
@@ -32,10 +32,9 @@ public class LogInTests extends BaseTest {
 	public void logInInvalidPassword() {
 		String email = excelReader.getStringData(SHEET_NAME, 20, 3);
 		String password = excelReader.getStringData(SHEET_NAME, 21, 3);
-		String textForAssertion = excelReader.getStringData(SHEET_NAME, 25, 3);
-
-		logInFormFilling(email, password);
+		logInPage.logInFormFilling(email, password);
 		
+		String textForAssertion = excelReader.getStringData(SHEET_NAME, 25, 3);
 		String actualText = logInPage.textInvalidCredentials();
 		assertEquals(actualText, textForAssertion);
 	}
@@ -46,7 +45,7 @@ public class LogInTests extends BaseTest {
 		String password = excelReader.getStringData(SHEET_NAME, 35, 3);
 		String textForAssertion = excelReader.getStringData(SHEET_NAME, 39, 3);
 
-		logInFormFilling(email, password);
+		logInPage.logInFormFilling(email, password);
 		
 		String actualText = logInPage.textInvalidCredentials();
 		assertEquals(actualText, textForAssertion);
@@ -57,7 +56,7 @@ public class LogInTests extends BaseTest {
 
 		String textForAssertion = excelReader.getStringData(SHEET_NAME, 53, 3);
 		
-		logInFormFilling("", "");
+		logInPage.logInFormFilling("", "");
 
 		String actualText = logInPage.textInvalidCredentials();
 		assertEquals(actualText, textForAssertion);

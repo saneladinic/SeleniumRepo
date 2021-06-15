@@ -49,4 +49,10 @@ public class LogInPage {
 	public String textInvalidCredentials() {
 		return this.getInvalidCredentialsText().getText();
 	}
+	
+	public void logInFormFilling(String email, String password) {
+		insertEmail(email);
+		insertPassword(password);
+		signInButtonClick();
+	}
 }

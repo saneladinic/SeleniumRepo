@@ -7,19 +7,25 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class MyPersonalInformationTests extends BaseTest {
-
+	
+	private static final String SHEET_NAME_LOGIN = "TSu2";
 	private static final String SHEET_NAME = "TSu5";
 
 	@BeforeMethod
 	public void beforeMethod() {
 		driver.navigate().to(ulrHome);
 		driver.manage().window().maximize();
+		String email = excelReader.getStringData(SHEET_NAME_LOGIN, 6, 3);
+		String password = excelReader.getStringData(SHEET_NAME_LOGIN, 7, 3);
+		menuNavigationPage.signInClick();
+		logInPage.insertEmail(email);
+		logInPage.insertPassword(password);
+		logInPage.signInButtonClick();
+		myAccountPage.myPersonalInformationClick();
 	}
 
 	@Test(priority = 1)
 	public void radioButtonCheckedTest() {
-		logIn();
-		myAccountPage.myPersonalInformationClick();
 		myPersonalInformaitionPage.getSelectedMr();
 		myPersonalInformaitionPage.mrsRadioButtonClick();
 
@@ -34,8 +40,6 @@ public class MyPersonalInformationTests extends BaseTest {
 
 	@Test(priority = 2)
 	public void emptyFirstNameTest() {
-		logIn();
-		myAccountPage.myPersonalInformationClick();
 		myPersonalInformaitionPage.clearFirstName();
 		String oldPassword = excelReader.getStringData(SHEET_NAME, 21, 3);
 		myPersonalInformaitionPage.insertOldPassword(oldPassword);
@@ -48,8 +52,6 @@ public class MyPersonalInformationTests extends BaseTest {
 
 	@Test(priority = 3)
 	public void emptyLastNameTest() {
-		logIn();
-		myAccountPage.myPersonalInformationClick();
 		myPersonalInformaitionPage.clearLastName();
 		String oldPassword = excelReader.getStringData(SHEET_NAME, 36, 3);
 		myPersonalInformaitionPage.insertOldPassword(oldPassword);
@@ -62,9 +64,6 @@ public class MyPersonalInformationTests extends BaseTest {
 
 	@Test(priority = 4)
 	public void changeDateOfBirthTest() {
-		logIn();
-		myAccountPage.myPersonalInformationClick();
-
 		String day = String.valueOf(excelReader.getIntegerData(SHEET_NAME, 50, 3));
 		myPersonalInformaitionPage.insertDayOfBirth(day);
 		String month = excelReader.getStringData(SHEET_NAME, 51, 3);
@@ -73,7 +72,6 @@ public class MyPersonalInformationTests extends BaseTest {
 		myPersonalInformaitionPage.insertYearOfBirth(year);
 		String oldPassword = excelReader.getStringData(SHEET_NAME, 53, 3);
 		myPersonalInformaitionPage.insertOldPassword(oldPassword);
-
 		myPersonalInformaitionPage.saveButtonClick();
 
 		String expectedText = excelReader.getStringData(SHEET_NAME, 56, 3);
@@ -83,8 +81,6 @@ public class MyPersonalInformationTests extends BaseTest {
 
 	@Test(priority = 5)
 	public void emptyPasswordTest() {
-		logIn();
-		myAccountPage.myPersonalInformationClick();
 		myPersonalInformaitionPage.saveButtonClick();
 
 		String expectedText = excelReader.getStringData(SHEET_NAME, 70, 3);
@@ -94,11 +90,8 @@ public class MyPersonalInformationTests extends BaseTest {
 
 	@Test(priority = 6)
 	public void invalidPasswordTest() {
-		logIn();
-		myAccountPage.myPersonalInformationClick();
 		String oldPassword = excelReader.getStringData(SHEET_NAME, 79, 3);
 		myPersonalInformaitionPage.insertOldPassword(oldPassword);
-
 		myPersonalInformaitionPage.saveButtonClick();
 
 		String expectedText = excelReader.getStringData(SHEET_NAME, 84, 3);

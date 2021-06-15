@@ -6,23 +6,28 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AddressTests extends BaseTest {
+public class MyAddressTests extends BaseTest {
 
+	private static final String SHEET_NAME_LOGIN = "TSu2";
 	private static final String SHEET_NAME = "TSu4";
 
 	@BeforeMethod
-	public void beforMethod() {
+	public void beforeMethod() {
 		driver.navigate().to(ulrHome);
 		driver.manage().window().maximize();
+		String email = excelReader.getStringData(SHEET_NAME_LOGIN, 6, 3);
+		String password = excelReader.getStringData(SHEET_NAME_LOGIN, 7, 3);
+		menuNavigationPage.signInClick();
+		logInPage.insertEmail(email);
+		logInPage.insertPassword(password);
+		logInPage.signInButtonClick();
+		myAccountPage.myAddressesClick();
 	}
 
 	@Test(priority = 1)
 	public void updateAddressTest() {
-
-		String newAddress = excelReader.getStringData(SHEET_NAME, 8, 3);
-		logIn();
-		myAccountPage.myAddressesClick();
 		myAddressPage.updateButtonClick();
+		String newAddress = excelReader.getStringData(SHEET_NAME, 8, 3);
 		yourAddressPage.updateAddress(newAddress);
 		yourAddressPage.saveButtonClick();
 
@@ -33,8 +38,6 @@ public class AddressTests extends BaseTest {
 
 	@Test(priority = 2)
 	public void addNewAddressTest() throws InterruptedException {
-		logIn();
-		myAccountPage.myAddressesClick();
 		myAddressPage.addNewAddressButtonClick();
 		String address = excelReader.getStringData(SHEET_NAME, 22, 3);
 		yourAddressPage.insertAddress(address);
@@ -60,25 +63,12 @@ public class AddressTests extends BaseTest {
 	}
 
 	@Test(priority = 3)
-	public void removeAddressTest() throws InterruptedException {
-		logIn();
-		myAccountPage.myAddressesClick();
-		Thread.sleep(5000);
+	public void removeAddressTest() {
 		myAddressPage.deleteButtonClick();
 
 		int textForAssertion = excelReader.getIntegerData(SHEET_NAME, 42, 3);
 		int addressCount = myAddressPage.addressCount();
 		assertEquals(addressCount, textForAssertion);
-	}
-
-	public void logIn() {
-
-		String email = excelReader.getStringData("TSu2", 6, 3);
-		String password = excelReader.getStringData("TSu2", 7, 3);
-		mainNavigation.signInClick();
-		logInPage.insertEmail(email);
-		logInPage.insertPassword(password);
-		logInPage.signInButtonClick();
 	}
 
 	@AfterMethod

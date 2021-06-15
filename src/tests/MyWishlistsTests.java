@@ -8,18 +8,24 @@ import org.testng.annotations.Test;
 
 public class MyWishlistsTests extends BaseTest {
 
+	private static final String SHEET_NAME_LOGIN = "TSu2";
 	private static final String SHEET_NAME = "TSu6";
 
 	@BeforeMethod
 	public void beforeMethod() {
 		driver.navigate().to(ulrHome);
 		driver.manage().window().maximize();
+		String email = excelReader.getStringData(SHEET_NAME_LOGIN, 6, 3);
+		String password = excelReader.getStringData(SHEET_NAME_LOGIN, 7, 3);
+		menuNavigationPage.signInClick();
+		logInPage.insertEmail(email);
+		logInPage.insertPassword(password);
+		logInPage.signInButtonClick();
+		myAccountPage.myWishlistsClick();
 	}
 
 	@Test(priority = 1)
 	public void addOneWishlistTest() {
-		logIn();
-		myAccountPage.myWishlistsClick();
 		String name = excelReader.getStringData(SHEET_NAME, 6, 3);
 		myWishlistsPage.insertNameForWishlist(name);
 		myWishlistsPage.saveButtonWishListClisck();
@@ -31,8 +37,6 @@ public class MyWishlistsTests extends BaseTest {
 
 	@Test(priority = 2)
 	public void addSeveralWishlistTest() {
-		logIn();
-		myAccountPage.myWishlistsClick();
 		String name = excelReader.getStringData(SHEET_NAME, 20, 3);
 		myWishlistsPage.insertNameForWishlist(name);
 		myWishlistsPage.saveButtonWishListClisck();
@@ -50,8 +54,6 @@ public class MyWishlistsTests extends BaseTest {
 
 	@Test(priority = 3)
 	public void deleteOneWishlistTest() throws InterruptedException {
-		logIn();
-		myAccountPage.myWishlistsClick();
 		myWishlistsPage.deleteButtonClick();
 		Thread.sleep(3000);
 		int textForAssertion = excelReader.getIntegerData(SHEET_NAME, 40, 3);
